@@ -1,0 +1,154 @@
+/* Resetando o padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Poppins', sans-serif; /* Fonte moderna e limpa */
+    background: linear-gradient(135deg, #2C3E50, #3498DB); /* Azul e preto */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container principal */
+.form-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    overflow: hidden;
+    position: relative; /* para o controle de overflow */
+}
+
+/* Título principal */
+h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Títulos de seções */
+h3 {
+    font-size: 24px;
+    color: #ecf0f1;
+    margin-bottom: 20px;
+}
+
+/* Estilo para os botões */
+button {
+    background-color: #2ECC71; /* Cor verde vibrante */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600; /* Peso da fonte para mais impacto */
+    padding: 12px 24px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px; /* Espaçamento entre letras para dar um estilo mais moderno */
+}
+
+button:hover {
+    background-color: #27AE60;
+    transform: scale(1.1);
+}
+
+/* Formulário */
+#despesa-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Inputs do formulário */
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #34495E;
+    color: #ecf0f1;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+input:focus {
+    outline: none;
+    background-color: #2C3E50;
+}
+
+/* Lista de despesas */
+#despesas-lista {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+    max-height: 300px; /* Definindo altura máxima para a lista */
+    overflow-y: auto; /* Scroll ativo se o conteúdo ultrapassar a altura */
+}
+
+#despesas-lista li {
+    background-color: #34495E;
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ecf0f1;
+    font-size: 16px;
+}
+
+#despesas-lista li span {
+    font-size: 16px;
+}
+
+#despesas-lista li button {
+    background-color: #E74C3C; /* Cor vibrante para botões de excluir */
+    margin-left: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+#despesas-lista li button:hover {
+    background-color: #C0392B;
+}
+
+/* Layout das seções (Mostrar e esconder formulário e lista) */
+#formulario, #listar {
+    display: none;
+}
+
+#listar {
+    display: block;
+}
+
+/* Adicionando o efeito de sombra */
+.shadow-glow {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+/* Botões específicos de navegação */
+#btn-incluir {
+    background-color: #2ECC71; /* Cor mais vibrante */
+}
+
+#btn-incluir:hover {
+    background-color: #27AE60;
+}
+
+button.cancelar {
+    background-color: #F39C12;
+}
+
+button.cancelar:hover {
+    background-color: #E67E22;
+}

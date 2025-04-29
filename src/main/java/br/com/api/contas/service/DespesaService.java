@@ -66,4 +66,8 @@ public class DespesaService {
     public BigDecimal somarDespesas() {
         return repository.somarDespesas();
     }
+
+    public BigDecimal obterDespesasPorMes(int mes, int ano) {
+        return repository.somarDespesasPorMes(mes, ano);
+    }
 }
