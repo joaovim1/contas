@@ -20,4 +20,7 @@ public class Despesa {
     private BigDecimal valor;
 
     private LocalDate data;
+
+    @Column(nullable = false)
+    private boolean pago = false;
 }

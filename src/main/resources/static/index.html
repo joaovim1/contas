@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+    
 </head>
 
 <body>
@@ -17,8 +18,34 @@
 
         <div id="listar">
             <h3>Despesas</h3>
-            <div id="valor-total" style="font-size: 18px; margin-bottom: 20px;">Valor Total: R$ 0,00</div>
 
+            <div style="margin-bottom: 20px;">
+                <label for="mesFiltro">Mês:</label>
+                <select id="mesFiltro" onchange="">
+                    
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            
+                <label for="anoFiltro">Ano:</label>
+                <input type="number" id="anoFiltro" value="2025" min="2000" max="2099" />
+            
+    
+            </div>
+
+            <div id="valor-total" style="font-size: 18px; margin-bottom: 20px;">Total Despesas: R$ 0,00</div>
+            
+            <div id="valor-cigarro" style="font-size: 18px; margin-bottom: 20px;">Total gasto com Cigarro: R$ 0,00</div>
             <ul id="despesas-lista"></ul>
             <button id="btn-incluir" onclick="showForm()">Incluir Nova Despesa</button>
         </div>
@@ -34,131 +61,5 @@
             <button onclick="showList()">Cancelar</button>
         </div>
     </div>
-
-    <script>
-        const apiUrl = 'http://localhost:8080/despesas';
-
-        $(document).ready(function () {
-            $('#valor').mask('000.000.000.000.000,00', { reverse: true });
-
-            loadDespesas();
-
-            $('#despesa-form').submit(function (e) {
-                e.preventDefault();
-
-                const rawValor = $('#valor').val().replace(/\./g, '').replace(',', '.');
-
-                const despesaData = {
-                    descricao: $('#descricao').val(),
-                    valor: rawValor,
-                    data: $('#data').val()
-                };
-
-                const method = $('#form-title').text() === 'Adicionar Despesa' ? 'POST' : 'PUT';
-                const url = method === 'POST' ? apiUrl : `${apiUrl}/${$('#descricao').data('id')}`;
-
-                $.ajax({
-                    url: url,
-                    method: method,
-                    contentType: 'application/json',
-                    data: JSON.stringify(despesaData),
-                    success: function () {
-                        alert('Despesa salva!');
-                        loadDespesas();
-                        resetForm();
-                        showList();
-                    },
-                    error: function () {
-                        alert('Erro ao salvar a despesa!');
-                    }
-                });
-            });
-        });
-
-        function loadDespesas() {
-            $.get(apiUrl, function (despesas) {
-                const lista = $('#despesas-lista');
-                lista.empty();
-                let total = 0;
-
-                despesas.forEach(despesa => {
-                    const valorNumerico = parseFloat(despesa.valor);
-                    total += valorNumerico;
-
-                    const item = $(`
-                        <li>
-                            <span>${despesa.descricao} - ${formatCurrency(valorNumerico)} - ${formatDate(despesa.data)}</span>
-                            <button onclick="editDespesa(${despesa.id})">Editar</button>
-                            <button onclick="deleteDespesa(${despesa.id})">Excluir</button>
-                        </li>
-                    `);
-                    lista.append(item);
-                });
-
-                $('#valor-total').text(`Valor Total: ${formatCurrency(total)}`);
-            });
-        }
-
-        function formatCurrency(value) {
-            return value.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            });
-        }
-
-        function formatDate(date) {
-            const d = new Date(date);
-            const day = ("0" + d.getDate()).slice(-2);
-            const month = ("0" + (d.getMonth() + 1)).slice(-2);
-            const year = d.getFullYear();
-            return `${day}/${month}/${year}`;
-        }
-
-        function deleteDespesa(id) {
-            $.ajax({
-                url: `${apiUrl}/${id}`,
-                method: 'DELETE',
-                success: function () {
-                    alert('Despesa excluída!');
-                    loadDespesas();
-                },
-                error: function () {
-                    alert('Erro ao excluir a despesa!');
-                }
-            });
-        }
-
-        function editDespesa(id) {
-            $.get(`${apiUrl}/${id}`, function (despesa) {
-                $('#descricao').val(despesa.descricao).data('id', despesa.id);
-                $('#valor').val(formatCurrencyRaw(despesa.valor));
-                $('#data').val(despesa.data);
-                $('#form-title').text('Editar Despesa');
-                showForm();
-            });
-        }
-
-        function formatCurrencyRaw(value) {
-            return parseFloat(value).toFixed(2).replace('.', ',');
-        }
-
-        function showForm() {
-            $('#formulario').show();
-            $('#listar').hide();
-        }
-
-        function showList() {
-            $('#formulario').hide();
-            $('#listar').show();
-        }
-
-        function resetForm() {
-            $('#descricao').val('').removeData('id');
-            $('#valor').val('');
-            $('#data').val('');
-            $('#form-title').text('Adicionar Despesa');
-        }
-    </script>
-</body>
-
+    <script src="script.js"></script>
 </html>
