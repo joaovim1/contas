@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,8 +24,10 @@ import br.com.api.contas.repository.DespesaRepository;
 import br.com.api.contas.service.DespesaService;
 import br.com.api.contas.service.SaldoService;
 
+
 @RestController
 @RequestMapping("/despesas")
+//@CrossOrigin(origins = "http://localhost:5173")
 public class DespesaController {
 
 private final DespesaService despesaService;

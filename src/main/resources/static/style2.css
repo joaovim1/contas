@@ -95,13 +95,14 @@ h3 {
 
 /* Botões */
 button {
+    background-color: #ecf0f1;
     padding: 8px 14px;
-    border: none;
+    border: 1px;
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.3s ease;
+    /*transition: background-color 0.3s ease;*/
 }
 
 button:hover {
@@ -122,6 +123,7 @@ button[onclick^="editDespesa"] {
 }
 
 button[onclick^="deleteDespesa"] {
+    
     background-color: #e74c3c;
     color: white;
 }
