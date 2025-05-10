@@ -2,11 +2,13 @@ package br.com.api.contas.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -133,5 +135,20 @@ public ResponseEntity<BigDecimal> getTotalDespesasPagas(@RequestParam("mes") int
     return ResponseEntity.ok(totalPagas);
 }
 
+@PatchMapping("/{id}")
+public ResponseEntity<Despesa> atualizarStatusPagamento(@PathVariable Long id, @RequestBody Map<String, Boolean> body) {
+    Optional<Despesa> despesaOptional = despesaService.buscarPorId(id);
+    if (!despesaOptional.isPresent()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    Despesa despesa = despesaOptional.get();
+    if (body.containsKey("pago")) {
+        despesa.setPago(body.get("pago"));
+    }
+
+    repository.save(despesa);
+    return ResponseEntity.ok(despesa);
+}
 
 }

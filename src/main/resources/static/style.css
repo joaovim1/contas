@@ -188,3 +188,9 @@ button.cancelar:hover {
     background-color: #e67e22;
 }
 
+.toggle-pago-btn {
+    margin-left: 10px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}

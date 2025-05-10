@@ -53,11 +53,7 @@ $(document).ready(function () {
 
         if (mes && ano) {
             url += `?mes=${parseInt(mes)}&ano=${ano}`;
-        }
-        else if (ano) {
-            url += `?ano=${ano}`;
-        }
-        else if (mes === "") {
+        } else if (ano) {
             url += `?ano=${ano}`;
         }
 
@@ -67,15 +63,26 @@ $(document).ready(function () {
                 const lista = $('#despesas-lista');
                 lista.empty();
                 let total = 0;
-                let totalCigarro = 0; 
+                let totalCigarro = 0;
+                let totalPago = 0;
+                let totalGasto = 0;
 
                 despesas.forEach(despesa => {
                     const valorNumerico = parseFloat(despesa.valor);
-                    total += valorNumerico;
+                    const pago = despesa.pago === true;
 
-                   
+                    totalGasto += valorNumerico;
+
+                    if (!pago) {
+                        total += valorNumerico;
+                    }
+
                     if (despesa.descricao && despesa.descricao.toUpperCase().includes('CIGARRO')) {
-                        totalCigarro += valorNumerico; 
+                        totalCigarro += valorNumerico;
+                    }
+
+                    if (pago) {
+                        totalPago += valorNumerico;
                     }
 
                     const item = $(`
@@ -83,17 +90,56 @@ $(document).ready(function () {
                             <span>${despesa.descricao} - ${formatCurrency(valorNumerico)} - ${formatDate(despesa.data)}</span>
                             <button onclick="editDespesa(${despesa.id})">Editar</button>
                             <button onclick="deleteDespesa(${despesa.id})">Excluir</button>
-                            
+                            <button 
+                                class="toggle-pago-btn" 
+                                style="background-color: ${pago ? '#4caf50' : '#f44336'}; color: white;">
+                                ${pago ? '<i class="fas fa-check-circle"></i> Pago' : '<i class="fas fa-money-bill-wave"></i> Pagar'}
+                            </button>
                         </li>
                     `);
+
+                    const botao = item.find('.toggle-pago-btn');
+
+                    botao.data('id', despesa.id);
+                    botao.data('pago', pago);
+
+                    botao.on('click', function () {
+                        const id = $(this).data('id');
+                        const pagoAtual = $(this).data('pago');
+                        const novoPago = !pagoAtual;
+
+                        fetch(`${apiUrl}/${id}`, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ pago: novoPago })
+                        })
+                        .then(() => {
+                            loadDespesas(); // Atualiza toda a lista
+                        })
+                        .catch(() => {
+                            alert('Erro ao atualizar o pagamento.');
+                        });
+                    });
+
+                    // Hover para mostrar "Cancelar Pagamento"
+                    botao.on('mouseover', function () {
+                        if ($(this).data('pago') === true) {
+                            $(this).html('<i class="fas fa-times-circle"></i> Cancelar Pagamento');
+                        }
+                    });
+
+                    botao.on('mouseout', function () {
+                        const pagoAtual = $(this).data('pago');
+                        $(this).html(pagoAtual ? '<i class="fas fa-check-circle"></i> Pago' : '<i class="fas fa-money-bill-wave"></i> Pagar');
+                    });
+
                     lista.append(item);
                 });
 
-                
-                $('#valor-total').text(`Total Despesa: ${formatCurrency(total)}`);
-
-                
+                $('#total-mes').text(`Total do mês: ${formatCurrency(totalGasto)}`);
+                $('#valor-total').text(`Total a Pagar: ${formatCurrency(total)}`);
                 $('#valor-cigarro').text(`Total gasto com Cigarro: ${formatCurrency(totalCigarro)}`);
+                $('#valor-pago').text(`Total Pago: ${formatCurrency(totalPago)}`);
             })
             .catch(() => {
                 alert('Erro ao carregar despesas.');
@@ -168,4 +214,5 @@ $(document).ready(function () {
     window.showList = showList;
     window.editDespesa = editDespesa;
     window.deleteDespesa = deleteDespesa;
+    window.resetForm = resetForm;
 });

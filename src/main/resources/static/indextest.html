@@ -5,31 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Despesas - Painel de Controle</title>
-    
     <link rel="stylesheet" href="style2.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
-    <script src="script.js"></script>
-    
-    
 </head>
 
 <body>
     <div class="form-container shadow-glow">
         <h2>Controle de Despesas</h2>
 
+        <!-- Adicionando os widgets para mostrar os totais -->
+        <div class="widget-container">
+            <div id="total-mes-widget" class="widget-card">
+                <i class="fas fa-calendar-alt"></i>
+                <div>
+                    <div class="card-title">Total do Mês</div>
+                    <div id="total-mes" class="card-value">R$ 0,00</div>
+                </div>
+            </div>
+
+            <div id="valor-total-widget" class="widget-card">
+                <i class="fas fa-money-bill-wave"></i>
+                <div>
+                    <div class="card-title">Total a Pagar</div>
+                    <div id="valor-total" class="card-value">R$ 0,00</div>
+                </div>
+            </div>
+
+            <div id="valor-pago-widget" class="widget-card">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <div class="card-title">Total Pago</div>
+                    <div id="valor-pago" class="card-value">R$ 0,00</div>
+                </div>
+            </div>
+
+            <div id="valor-cigarro-widget" class="widget-card">
+                <i class="fas fa-smoking"></i>
+                <div>
+                    <div class="card-title">Total com Cigarro</div>
+                    <div id="valor-cigarro" class="card-value">R$ 0,00</div>
+                </div>
+            </div>
+        </div>
+
         <div id="listar">
             <h3>Despesas</h3>
-            
-            <div style="margin-bottom: 20px; margin-top: 20px;">
-                
+            <div style="margin-bottom: 20px;">
                 <label for="mesFiltro">Mês:</label>
-                <select id="mesFiltro" onchange="">
-                
-                    
+                <select id="mesFiltro">
                     <option value="01">Janeiro</option>
                     <option value="02">Fevereiro</option>
                     <option value="03">Março</option>
@@ -43,20 +68,12 @@
                     <option value="11">Novembro</option>
                     <option value="12">Dezembro</option>
                 </select>
-                
-            
+
                 <label for="anoFiltro">Ano:</label>
                 <input type="number" id="anoFiltro" value="2025" min="2000" max="2099" />
-                <button id="btn-incluir" onclick="showForm(), resetForm()"><i class="fas fa-plus-circle"></i>Adicionar Conta</button>
-                
             </div>
-            <div id="total-mes" style="font-size: 18px; margin-bottom: 20px;">Total do Mês: R$ 0,00</div>
-            <div id="valor-total" style="font-size: 18px; margin-bottom: 20px;">Total a Pagar: R$ 0,00</div>
-            <div id="valor-pago" style="font-size: 18px; margin-bottom: 20px;">Total Pago: R$ 0,00</div>
-            <div id="valor-cigarro" style="font-size: 18px; margin-bottom: 20px;">Total gasto com Cigarro: R$ 0,00</div>
-            
             <ul id="despesas-lista"></ul>
-            
+            <button id="btn-incluir" onclick="showForm()">Incluir Nova Despesa</button>
         </div>
 
         <div id="formulario">
@@ -70,5 +87,7 @@
             <button onclick="showList()">Cancelar</button>
         </div>
     </div>
-    
+    <script src="script.js"></script>
+</body>
+
 </html>
