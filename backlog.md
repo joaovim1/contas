@@ -78,11 +78,6 @@
 
 ## 📥 Funcionalidades Futuras
 
-### 🧾 Upload de comprovantes
-- [ ] Upload de imagem/documento de uma despesa
-- [ ] Visualização do comprovante
-- [ ] Backend: endpoint de upload + campo na despesa
-
 ### 📤 Exportar dados
 - [ ] Exportar despesas como `.csv` ou `.xlsx`
 - [ ] Filtros aplicados devem refletir no arquivo
