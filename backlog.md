@@ -1,6 +1,5 @@
 # 📘 Backlog – Sistema de Controle de Despesas (Front-end + API)
 
-> 🎯 Este documento lista todas as funcionalidades atuais e planejadas da aplicação. Use com o Obsidian para rastrear progresso e organizar o desenvolvimento.
 
 ---
 
