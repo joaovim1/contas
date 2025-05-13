@@ -27,7 +27,7 @@ import br.com.api.contas.service.SaldoService;
 
 @RestController
 @RequestMapping("/despesas")
-//@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://contas-production.up.railway.app")
 public class DespesaController {
 
 private final DespesaService despesaService;
