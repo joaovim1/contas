@@ -1,5 +1,5 @@
 $(document).ready(function () {
-const apiUrl = 'https://contas-production.up.railway.app/despesas';
+const apiUrl = 'https://contas-production.up.railway.app:8080/despesas';
 
 $('#valor').mask('000.000.000.000.000,00', { reverse: true });
 
