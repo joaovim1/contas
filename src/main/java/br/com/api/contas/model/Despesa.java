@@ -23,4 +23,6 @@ public class Despesa {
 
     @Column(nullable = false)
     private boolean pago = false;
+
+    private String tipo;
 }

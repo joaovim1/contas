@@ -2,73 +2,88 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Despesas - Painel de Controle</title>
-    
-    <link rel="stylesheet" href="style2.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Despesas - Painel de Controle</title>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
-    <script src="script.js"></script>
-    
-    
+<link rel="stylesheet" href="style2.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+<script src="script.js"></script>
+
+
 </head>
 
 <body>
-    <div class="form-container shadow-glow">
-        <h2>Controle de Despesas</h2>
+<div class="form-container shadow-glow">
+    <h2>Controle de Despesas</h2>
 
-        <div id="listar">
-            <h3>Despesas</h3>
+    <div id="listar">
+        <h3>Despesas</h3>
+        
+        <div style="margin-bottom: 20px; margin-top: 20px;">
             
-            <div style="margin-bottom: 20px; margin-top: 20px;">
-                
-                <label for="mesFiltro">Mês:</label>
-                <select id="mesFiltro" onchange="">
-                
-                    
-                    <option value="01">Janeiro</option>
-                    <option value="02">Fevereiro</option>
-                    <option value="03">Março</option>
-                    <option value="04">Abril</option>
-                    <option value="05">Maio</option>
-                    <option value="06">Junho</option>
-                    <option value="07">Julho</option>
-                    <option value="08">Agosto</option>
-                    <option value="09">Setembro</option>
-                    <option value="10">Outubro</option>
-                    <option value="11">Novembro</option>
-                    <option value="12">Dezembro</option>
-                </select>
-                
+            <label for="mesFiltro">Mês:</label>
+            <select id="mesFiltro" onchange="">
             
-                <label for="anoFiltro">Ano:</label>
-                <input type="number" id="anoFiltro" value="2025" min="2000" max="2099" />
-                <button id="btn-incluir" onclick="showForm(), resetForm()"><i class="fas fa-plus-circle"></i>Adicionar Conta</button>
                 
-            </div>
-            <div id="total-mes" style="font-size: 18px; margin-bottom: 20px;">Total do Mês: R$ 0,00</div>
-            <div id="valor-total" style="font-size: 18px; margin-bottom: 20px;">Total a Pagar: R$ 0,00</div>
-            <div id="valor-pago" style="font-size: 18px; margin-bottom: 20px;">Total Pago: R$ 0,00</div>
-            <div id="valor-cigarro" style="font-size: 18px; margin-bottom: 20px;">Total gasto com Cigarro: R$ 0,00</div>
+                <option value="01">Janeiro</option>
+                <option value="02">Fevereiro</option>
+                <option value="03">Março</option>
+                <option value="04">Abril</option>
+                <option value="05">Maio</option>
+                <option value="06">Junho</option>
+                <option value="07">Julho</option>
+                <option value="08">Agosto</option>
+                <option value="09">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+            </select>
             
-            <ul id="despesas-lista"></ul>
+        
+            <label for="anoFiltro">Ano:</label>
+            <input type="number" id="anoFiltro" value="2025" min="2000" max="2099" />
+            <label for="filtro-categoria">Filtrar por:</label>
+            <select id="filtro-categoria">
+                <option value="todas">Todas</option>
+                <option value="vr">VR</option>
+                <option value="pagas">Todas Pagas</option>
+                <option value="naoPagas">Todas Não Pagas</option>
+                <option value="cigarro">Cigarro</option>
+            </select>               
+
+            <button id="btn-incluir" onclick="showForm(), resetForm()"><i class="fas fa-plus-circle"></i>Adicionar Conta</button>
             
         </div>
-
-        <div id="formulario">
-            <h3 id="form-title">Adicionar Despesa</h3>
-            <form id="despesa-form">
-                <input type="text" id="descricao" placeholder="Descrição" required>
-                <input type="text" id="valor" placeholder="Valor" required>
-                <input type="date" id="data" required>
-                <button type="submit" id="btn-submit">Salvar</button>
-            </form>
-            <button onclick="showList()">Cancelar</button>
-        </div>
+        <div id="total-mes" style="font-size: 18px; margin-bottom: 20px;">Total do Mês: R$ 0,00</div>
+        <div id="valor-total" style="font-size: 18px; margin-bottom: 20px;">Total a Pagar: R$ 0,00</div>
+        <div id="valor-pago" style="font-size: 18px; margin-bottom: 20px;">Total Pago: R$ 0,00</div>
+        <div id="valor-cigarro" style="font-size: 18px; margin-bottom: 20px;">Total gasto com Cigarro: R$ 0,00</div>
+        <div id="valor-vr" style="font-size: 18px; margin-bottom: 20px;">Total gasto com VR: R$ 0,00</div>
+        
+        <ul id="despesas-lista"></ul>
+        
     </div>
-    
+
+    <div id="formulario">
+        <h3 id="form-title">Adicionar Despesa</h3>
+        <form id="despesa-form">
+            <input type="text" id="descricao" placeholder="Descrição" required>
+            <input type="text" id="valor" placeholder="Valor" required>
+            <input type="date" id="data" required>
+            <label for="tipo" class="checkbox-label">
+            <input type="checkbox" id="tipo" />
+                Marcar como VR
+            </label>
+            
+            <button type="submit" id="btn-submit">Salvar</button>
+        </form>
+        <button onclick="showList()">Cancelar</button>
+    </div>
+</div>
+
 </html>

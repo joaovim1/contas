@@ -161,7 +161,7 @@ button[onclick^="deleteDespesa"] {
     margin-bottom: 20px;
 }
 
-#despesa-form input {
+#despesa-form input, select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -196,4 +196,21 @@ button[onclick^="deleteDespesa"] {
         width: 100%;
         margin-bottom: 10px;
     }
+}
+
+.checkbox-label {
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+/* Estilo da checkbox */
+#tipo[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #3498db; /* cor consistente com seu azul principal */
+    cursor: pointer;
 }
