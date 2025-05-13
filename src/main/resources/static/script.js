@@ -154,11 +154,11 @@ fetch(url)
             lista.append(item);
         });
 
-        $('#total-mes').text(`Total do mês: ${formatCurrency(totalGasto)}`);
-        $('#valor-total').text(`Total a Pagar: ${formatCurrency(total)}`);
-        $('#valor-cigarro').text(`Total gasto com Cigarro: ${formatCurrency(totalCigarro)}`);
-        $('#valor-pago').text(`Total Pago: ${formatCurrency(totalPago)}`);
-        $('#valor-vr').text(`Gastos com VR: ${formatCurrency(totalVR)}`);
+        $('#valor-total-mes').text(`${formatCurrency(totalGasto)}`);
+        $('#valor-total').text(`${formatCurrency(total)}`);
+        $('#valor-cigarro').text(`${formatCurrency(totalCigarro)}`);
+        $('#valor-pago').text(`${formatCurrency(totalPago)}`);
+        $('#valor-vr').text(`${formatCurrency(totalVR)}`)
     })
     .catch(() => {
         alert('Erro ao carregar despesas.');
@@ -239,42 +239,34 @@ function resetForm() {
 function changeDivFilter() {
     const filtroSelecionado = $('#filtro-categoria').val();
 
-    if(filtroSelecionado === "vr") {
-        $("#total-mes").show();
-        $("#valor-total").hide();
-        $("#valor-pago").show();
-        $("#valor-cigarro").hide();
-        $("#valor-vr").show();
-    }
-    else if(filtroSelecionado === "todas") {
-        $("#total-mes").show();
-        $("#valor-total").show();
-        $("#valor-pago").show();
-        $("#valor-cigarro").show();
-        $("#valor-vr").show();
-    }
-    else if(filtroSelecionado === "pagas") {
-        $("#total-mes").show();
-        $("#valor-total").hide();
-        $("#valor-pago").show();
-        $("#valor-cigarro").hide();
-        $("#valor-vr").hide();
-    }
-    else if(filtroSelecionado === "naoPagas") {
-        $("#total-mes").hide();
-        $("#valor-total").show();
-        $("#valor-pago").hide();
-        $("#valor-cigarro").hide();
-        $("#valor-vr").hide();
-    }
-    else if(filtroSelecionado === "cigarro") {
-        $("#total-mes").show();
-        $("#valor-total").hide();
-        $("#valor-pago").show();
-        $("#valor-cigarro").show();
-        $("#valor-vr").hide();
-    }
+    
+    $("#card-total-mes").hide();
+    $("#card-total").hide();
+    $("#card-pago").hide();
+    $("#card-cigarro").hide();
+    $("#card-vr").hide();
 
+    
+    if (filtroSelecionado === "vr") {
+        $("#card-total-mes").show();
+        $("#card-pago").show();
+        $("#card-vr").show();
+    } else if (filtroSelecionado === "todas") {
+        $("#card-total-mes").show();
+        $("#card-total").show();
+        $("#card-pago").show();
+        $("#card-cigarro").show();
+        $("#card-vr").show();
+    } else if (filtroSelecionado === "pagas") {
+        $("#card-total-mes").show();
+        $("#card-pago").show();
+    } else if (filtroSelecionado === "naoPagas") {
+        $("#card-total").show();
+    } else if (filtroSelecionado === "cigarro") {
+        $("#card-total-mes").show();
+        $("#card-pago").show();
+        $("#card-cigarro").show();
+    }
 }
 
 window.showForm = showForm;
@@ -282,4 +274,6 @@ window.showList = showList;
 window.editDespesa = editDespesa;
 window.deleteDespesa = deleteDespesa;
 window.resetForm = resetForm;
+window.changeDivFilter = changeDivFilter;
+
 });
