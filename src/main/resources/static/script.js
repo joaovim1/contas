@@ -1,5 +1,5 @@
 $(document).ready(function () {
-const apiUrl = 'caring-perfection.railway.internal/despesas';
+const apiUrl = 'https://paineldespesas.up.railway.app/despesas';
 
 $('#valor').mask('000.000.000.000.000,00', { reverse: true });
 
