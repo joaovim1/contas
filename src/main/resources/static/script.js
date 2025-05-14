@@ -1,5 +1,5 @@
 $(document).ready(function () {
-const apiUrl = 'https://paineldespesas.up.railway.app/despesas';
+const apiUrl = 'http://localhost:8080/despesas';
 
 $('#valor').mask('000.000.000.000.000,00', { reverse: true });
 
