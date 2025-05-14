@@ -1,6 +1,6 @@
 $(document).ready(function () {
 //favor salvar
-const apiUrl = 'https://painelcontas.onrender.com/despesas';
+const apiUrl = 'http://localhost:8080/despesas';
 
 $('#valor').mask('000.000.000.000.000,00', { reverse: true });
 
@@ -99,8 +99,8 @@ fetch(url)
             const valorNumerico = parseFloat(despesa.valor);
             const pago = despesa.pago === true;
             const tipo = despesa.tipo;
-
-            totalGasto += valorNumerico;
+            if(tipo !== 'VR') totalGasto += valorNumerico;
+            
             if (!pago && tipo !== 'VR') total += valorNumerico;
             if (pago && tipo === 'VR') totalVR += valorNumerico;
             if (despesa.descricao?.toUpperCase().includes('CIGARRO') && pago) {

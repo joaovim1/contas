@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface DespesaRepository extends JpaRepository<Despesa, Long> {
-
-    @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d")
+//QUERYS POSTGREE
+       @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d")
     BigDecimal somarDespesas();
 
     @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d WHERE EXTRACT(MONTH FROM d.data) = :mes AND EXTRACT(YEAR FROM d.data) = :ano")
@@ -25,12 +25,9 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 
     @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d WHERE d.pago = true AND EXTRACT(MONTH FROM d.data) = :mes AND EXTRACT(YEAR FROM d.data) = :ano")
     BigDecimal somarDespesasPagas(@Param("mes") int mes, @Param("ano") int ano);
-    
-    
-    /*MYSQL
 
     
-    @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d")
+ /* @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d")
     BigDecimal somarDespesas();
 
     @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d WHERE FUNCTION('MONTH', d.data) = :mes AND FUNCTION('YEAR', d.data) = :ano")
@@ -44,5 +41,7 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 
     @Query("SELECT COALESCE(SUM(d.valor), 0) FROM Despesa d WHERE d.pago = true AND FUNCTION('MONTH', d.data) = :mes AND FUNCTION('YEAR', d.data) = :ano")
     BigDecimal somarDespesasPagas(@Param("mes") int mes, @Param("ano") int ano);*/
+
+    
 
 }

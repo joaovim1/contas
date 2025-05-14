@@ -27,7 +27,7 @@ import br.com.api.contas.service.SaldoService;
 
 @RestController
 @RequestMapping("/despesas")
-@CrossOrigin(origins = "https://painelcontas.onrender.com")
+@CrossOrigin(origins = "*")
 public class DespesaController {
 
 private final DespesaService despesaService;
