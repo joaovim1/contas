@@ -47,7 +47,7 @@ public ResponseEntity<Despesa> criar(@RequestBody Despesa despesa) {
     return ResponseEntity.ok(despesaService.salvar(despesa));
 }
 
-@GetMapping
+@GetMapping("/{mes}/{ano}")
 public List<Despesa> listar(
     @RequestParam(required = false) Integer mes,
     @RequestParam(required = false) Integer ano) {
@@ -120,7 +120,7 @@ public ResponseEntity<BigDecimal> obterTotalDespesas() {
     return ResponseEntity.ok(despesaService.somarDespesas());
 }
 
-@GetMapping("/total/{mes}/{ano}")
+@GetMapping("/{mes}/{ano}")
 public ResponseEntity<List<Despesa>> listarPorMesEAno(@PathVariable int mes, @PathVariable int ano) {
     List<Despesa> total = despesaService.listarPorMesEAno(mes, ano);
     return ResponseEntity.ok(total);
