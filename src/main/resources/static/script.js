@@ -1,5 +1,5 @@
 $(document).ready(function () {
-const apiUrl = 'http://localhost:8080/despesas';
+const apiUrl = 'https://painelcontas.onrender.com/despesas';
 
 $('#valor').mask('000.000.000.000.000,00', { reverse: true });
 
