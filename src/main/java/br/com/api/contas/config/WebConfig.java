@@ -1,4 +1,4 @@
-package br.com.api.contas.config;
+/*package br.com.api.contas.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,3 +19,4 @@ public class WebConfig {
         };
     }
 }
+*/
