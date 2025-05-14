@@ -47,7 +47,7 @@ public ResponseEntity<Despesa> criar(@RequestBody Despesa despesa) {
     return ResponseEntity.ok(despesaService.salvar(despesa));
 }
 
-@GetMapping("/{mes}/{ano}")
+@GetMapping
 public List<Despesa> listar(
     @RequestParam(required = false) Integer mes,
     @RequestParam(required = false) Integer ano) {
