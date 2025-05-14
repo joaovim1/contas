@@ -109,7 +109,12 @@ $(document).ready(function () {
                }
             });
 
-
+            despesas.sort((a, b) => {
+                if (a.pago === false && b.pago === true) return -1;
+                if (a.pago === true && b.pago === false) return 1;
+                return 0;
+            });
+            
             const lista = $('#despesas-lista');
             lista.empty();
 
